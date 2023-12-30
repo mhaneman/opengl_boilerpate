@@ -6,23 +6,21 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-// Standard headers
-#include <cstdlib>
+#include <iostream>
 
 
 // A callback which allows GLFW to report errors whenever they occur
 static void glfwErrorCallback(int error, const char *description)
 {
-    fprintf(stderr, "GLFW returned an error:\n\t%s (%i)\n", description, error);
+  std::cerr << "GLFW returned an error:" << description << ", " << error << std::endl;
 }
 
 
-GLFWwindow* initialise()
+GLFWwindow* init_window()
 {
-    // Initialise GLFW
     if (!glfwInit())
     {
-        fprintf(stderr, "Could not start GLFW\n");
+    std::cerr << "Could not start GLFW" << std::endl;
         exit(EXIT_FAILURE);
     }
 
@@ -48,7 +46,7 @@ GLFWwindow* initialise()
     // Ensure the window is set up correctly
     if (!window)
     {
-        fprintf(stderr, "Could not open GLFW window\n");
+        std::cerr << "Could not open GLFW window" << std::endl;
         glfwTerminate();
         exit(EXIT_FAILURE);
     }
@@ -70,7 +68,7 @@ GLFWwindow* initialise()
 int main(int argc, char* argb[])
 {
     // Initialise window using GLFW
-    GLFWwindow* window = initialise();
+    GLFWwindow* window = init_window();
 
     // Run an OpenGL application using this window
     runProgram(window);
